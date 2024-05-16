@@ -7,9 +7,11 @@ def move_rocket(x_coordinate):
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
-        x_coordinate -= config.STEP # Pohyb rakety vľavo
+        if x_coordinate > 10: # Aby raketa nešla za ľavý okraj
+            x_coordinate -= config.STEP # Pohyb rakety vľavo
     if keys[pygame.K_RIGHT]:
-        x_coordinate += config.STEP  # Pohyb rakety vpravo
+        if x_coordinate < 480: # Aby raketa nešla za pravý okraj
+            x_coordinate += config.STEP  # Pohyb rakety vpravo
     return x_coordinate
 
 if __name__ == "__main__":

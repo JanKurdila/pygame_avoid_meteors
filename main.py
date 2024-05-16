@@ -7,6 +7,7 @@ if __name__ == "__main__":
 
     window = pygame.display.set_mode(config.ROZLISENIE)
     pozadie = config.pozadie
+    raketa = config.raketa
 
     while True:
         # Ak vypnem okno, musím vypnuť pygame
@@ -16,4 +17,6 @@ if __name__ == "__main__":
                 sys.exit() # Vypnutie celého programu
 
         window.blit(pozadie, (0, 0))
+        window.blit(raketa, config.suradnice_rakety)
+
         pygame.display.update()

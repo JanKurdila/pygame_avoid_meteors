@@ -21,6 +21,7 @@ if __name__ == "__main__":
     window = pygame.display.set_mode(config.ROZLISENIE)
     pozadie = config.POZADIE
     raketa = config.RAKETA
+    meteor = config.METEOR
 
     x = config.SURADNICE_RAKETY[0] # Inicializácia x-súradnice rakety
 
@@ -36,6 +37,7 @@ if __name__ == "__main__":
         window.blit(pozadie, (0, 0))
         # window.blit(raketa, config.SURADNICE_RAKETY) Tu musíme upraviť lebo nastáva phyb
         window.blit(raketa, (x, config.SURADNICE_RAKETY[1]))
+        window.blit(meteor, (config.SURADNICE_METEORU))
 
         pygame.display.update()
 

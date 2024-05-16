@@ -4,6 +4,7 @@ from Config import config
 
 if __name__ == "__main__":
     pygame.init()
+    clock = pygame.time.Clock() # Objekt
 
     window = pygame.display.set_mode(config.ROZLISENIE)
     pozadie = config.pozadie
@@ -20,3 +21,5 @@ if __name__ == "__main__":
         window.blit(raketa, config.suradnice_rakety)
 
         pygame.display.update()
+
+        clock.tick(config.FPS)

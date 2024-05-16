@@ -14,6 +14,11 @@ def move_rocket(x_coordinate):
             x_coordinate += config.STEP  # Pohyb rakety vpravo
     return x_coordinate
 
+def falling_meteor(meteor_y):
+    meteor_y  += 3
+    return meteor_y
+
+
 if __name__ == "__main__":
     pygame.init()
     clock = pygame.time.Clock() # Objekt
@@ -24,6 +29,7 @@ if __name__ == "__main__":
     meteor = config.METEOR
 
     x = config.SURADNICE_RAKETY[0] # Inicializácia x-súradnice rakety
+    y = config.SURADNICE_METEORU[1] # Inicializácia x-súradnice meteoru
 
     while True:
         # Ak vypnem okno, musím vypnuť pygame
@@ -33,11 +39,12 @@ if __name__ == "__main__":
                 sys.exit() # Vypnutie celého programu
         
         x = move_rocket(x)
+        y = falling_meteor(y)
 
         window.blit(pozadie, (0, 0))
         # window.blit(raketa, config.SURADNICE_RAKETY) Tu musíme upraviť lebo nastáva phyb
         window.blit(raketa, (x, config.SURADNICE_RAKETY[1]))
-        window.blit(meteor, (config.SURADNICE_METEORU))
+        window.blit(meteor, (config.SURADNICE_METEORU[0], y))
 
         pygame.display.update()
 

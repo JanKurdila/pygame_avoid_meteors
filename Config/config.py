@@ -11,3 +11,8 @@ SURADNICE_METEORU = (250, 30)
 
 FPS = 25
 STEP = 5
+
+pygame.init()
+FONT_HRY = pygame.font.SysFont("comicsans", 50)
+FARBA_TEXTU = pygame.Color(255, 255, 255)
+POZICIA_TEXTU = (320, 10)

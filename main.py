@@ -1,9 +1,10 @@
 import pygame
 import sys
 from Config import config
+import random
 
 def move_rocket(x_coordinate):
-    "Funkcia na zistenie pohybu rakety"
+    """Funkcia na zistenie pohybu rakety"""
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
@@ -14,10 +15,12 @@ def move_rocket(x_coordinate):
             x_coordinate += config.STEP  # Pohyb rakety vpravo
     return x_coordinate
 
-def falling_meteor(meteor_y):
-    meteor_y  += 3
-    return meteor_y
+def generate_meteor():
+    """Funkcia bude generovať meteor na náhodnom mieste"""
 
+    return {'x': random.choice(range(10, 440, 50)),
+            'y': random.choice(range(-10, -500, -50))
+           }
 
 if __name__ == "__main__":
     pygame.init()
@@ -26,16 +29,19 @@ if __name__ == "__main__":
     window = pygame.display.set_mode(config.ROZLISENIE)
     pozadie = config.POZADIE
     raketa = config.RAKETA
-    meteor = config.METEOR
+    meteor_image = config.METEOR # Musíme premenovať meteor na napr. meteor_image, lebo nižšie používame cyklus for meteor in meteory:
     font_hry = config.FONT_HRY
 
     x = config.SURADNICE_RAKETY[0] # Inicializácia x-súradnice rakety
-    y = config.SURADNICE_METEORU[1] # Inicializácia y-súradnice meteoru
 
     score = 0
+    meteory = []
+
+    for i in range(5):
+        meteory.append(generate_meteor())
 
     while True:
-        score_text = config.FONT_HRY.render(f"SKÓRE: {score}", True, config.FARBA_TEXTU)
+        score_text = font_hry.render(f"SKÓRE: {score}", True, config.FARBA_TEXTU)
         # Ak vypnem okno, musím vypnuť pygame
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -43,12 +49,14 @@ if __name__ == "__main__":
                 sys.exit() # Vypnutie celého programu
         
         x = move_rocket(x)
-        y = falling_meteor(y)
-
+        
         window.blit(pozadie, (0, 0))
-        # window.blit(raketa, config.SURADNICE_RAKETY) Tu musíme upraviť lebo nastáva phyb
         window.blit(raketa, (x, config.SURADNICE_RAKETY[1]))
-        window.blit(meteor, (config.SURADNICE_METEORU[0], y))
+
+        for meteor in meteory:
+            window.blit(meteor_image, (meteor['x'], meteor['y']))
+            meteor['y'] += 2  # Pád meteoru   # predtým sme mali def falling_meteor
+        
         window.blit(score_text, config.POZICIA_TEXTU)
 
         pygame.display.update()

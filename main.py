@@ -73,6 +73,7 @@ if __name__ == "__main__":
                 meteory.remove(meteor)
             if is_collision(maska_rakety, meteor['mask'], (x, config.SURADNICE_RAKETY[1]), (meteor['x'], meteor['y'])):
                 print("GAME OVER")
+            # Keď prejde meteor cez raketu tak trba urobiť hneď stop hry, inak sa hra neukonči1!!!
 
         window.blit(score_text, config.POZICIA_TEXTU)
 

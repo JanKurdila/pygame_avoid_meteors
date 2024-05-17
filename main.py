@@ -53,9 +53,14 @@ if __name__ == "__main__":
         window.blit(pozadie, (0, 0))
         window.blit(raketa, (x, config.SURADNICE_RAKETY[1]))
 
-        for meteor in meteory:
+        for meteor in meteory[:]:     #  [:] pomocou toho vytvoríme kopiu
             window.blit(meteor_image, (meteor['x'], meteor['y']))
             meteor['y'] += 2  # Pád meteoru   # predtým sme mali def falling_meteor
+            if meteor['y'] > config.ROZLISENIE[1]:   # Pripočítavanie bodov do ukazovateľa SCORE
+                score += 1
+                meteory.remove(meteor) # Odstránenie meteoru zo zoznamu meteory ak  je mimo okna \
+                                       # ak mažeme prvok z poľa, je dobré mazať prvok z vytvorenje kopie
+                         
         
         window.blit(score_text, config.POZICIA_TEXTU)
 

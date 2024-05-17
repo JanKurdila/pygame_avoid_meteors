@@ -47,7 +47,7 @@ if __name__ == "__main__":
         if len(meteory) == 0:
             for i in range(5):
                 meteory.append(generate_meteor())
-                config.RYCHLOST_PADU_METEORU += 1
+            config.RYCHLOST_PADU_METEORU += 1    # Oprava odsadenia   
 
 
         for event in pygame.event.get():

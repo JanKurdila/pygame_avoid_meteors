@@ -45,6 +45,8 @@ if __name__ == "__main__":
     score = 0
     meteory = []
 
+    koniec_hry = False   #   Ukončenie hry
+
     while True:
         keys = pygame.key.get_pressed()
         score_text = font_hry.render(f"SKÓRE: {score}", True, config.FARBA_TEXTU)
@@ -65,15 +67,22 @@ if __name__ == "__main__":
         window.blit(pozadie, (0, 0))
         window.blit(raketa, (x, config.SURADNICE_RAKETY[1]))
 
-        for meteor in meteory[:]:
-            window.blit(meteor_image, (meteor['x'], meteor['y']))
-            meteor['y'] += config.RYCHLOST_PADU_METEORU
-            if meteor['y'] > config.ROZLISENIE[1]:
-                score += 1
-                meteory.remove(meteor)
-            if is_collision(maska_rakety, meteor['mask'], (x, config.SURADNICE_RAKETY[1]), (meteor['x'], meteor['y'])):
-                print("GAME OVER")
-            # Keď prejde meteor cez raketu tak trba urobiť hneď stop hry, inak sa hra neukonči1!!!
+        if not koniec_hry:
+            for meteor in meteory[:]:
+                window.blit(meteor_image, (meteor['x'], meteor['y']))
+                meteor['y'] += config.RYCHLOST_PADU_METEORU
+                if meteor['y'] > config.ROZLISENIE[1]:
+                    score += 1
+                    meteory.remove(meteor)
+                if is_collision(maska_rakety, meteor['mask'], (x, config.SURADNICE_RAKETY[1]), (meteor['x'], meteor['y'])):
+                    # print("GAME OVER")
+                    # Keď prejde meteor cez raketu tak trba urobiť hneď stop hry, inak sa hra neukonči1!!!
+                    koniec_hry = True
+                
+        if koniec_hry:
+            text_na_konci_hry = font_hry.render(f"GAME OVER", True, config.FARBA_TEXTU)
+            window.blit(text_na_konci_hry, config.POZICIA_TEXTU_KONCA_HRY)
+
 
         window.blit(score_text, config.POZICIA_TEXTU)
 

@@ -12,6 +12,8 @@ POCET_METEOROV = 0
 SURADNICE_RAKETY = (250, 685)
 # SURADNICE_METEORU = (250, 30) už nepotrebujeme, lebo ich bude generovať funkcia
 
+POZICIA_TEXTU_KONCA_HRY = (175, 400)
+
 FPS = 25
 STEP = 5
 

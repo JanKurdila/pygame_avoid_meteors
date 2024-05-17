@@ -45,9 +45,11 @@ if __name__ == "__main__":
         # Ak vypnem okno, musím vypnuť pygame
 
         if len(meteory) == 0:
-            for i in range(5):
-                meteory.append(generate_meteor())
             config.RYCHLOST_PADU_METEORU += 1    # Oprava odsadenia   
+            config.POCET_METEOROV += config.METEOR_INKREMENT
+            for i in range(config.POCET_METEOROV):  # Úprava - o kľko meteorov má príbudať 
+                meteory.append(generate_meteor())
+            
 
 
         for event in pygame.event.get():

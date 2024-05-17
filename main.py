@@ -37,12 +37,19 @@ if __name__ == "__main__":
     score = 0
     meteory = []
 
-    for i in range(5):
-        meteory.append(generate_meteor())
+    #for i in range(5):
+        #meteory.append(generate_meteor())
 
     while True:
         score_text = font_hry.render(f"SKÓRE: {score}", True, config.FARBA_TEXTU)
         # Ak vypnem okno, musím vypnuť pygame
+
+        if len(meteory) == 0:
+            for i in range(5):
+                meteory.append(generate_meteor())
+                config.RYCHLOST_PADU_METEORU += 1
+
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit() # Vypnutie pygamu
@@ -55,7 +62,7 @@ if __name__ == "__main__":
 
         for meteor in meteory[:]:     #  [:] pomocou toho vytvoríme kopiu
             window.blit(meteor_image, (meteor['x'], meteor['y']))
-            meteor['y'] += 2  # Pád meteoru   # predtým sme mali def falling_meteor
+            meteor['y'] += config.RYCHLOST_PADU_METEORU  
             if meteor['y'] > config.ROZLISENIE[1]:   # Pripočítavanie bodov do ukazovateľa SCORE
                 score += 1
                 meteory.remove(meteor) # Odstránenie meteoru zo zoznamu meteory ak  je mimo okna \
